@@ -12,7 +12,8 @@ export default function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Movies />} />
-                <Route path="/movie/:movieid" element={<Movie />} />
+                <Route path="/movie/:movieid" element={<MovieDays />} />
+                <Route path="/session/:movieid" element={<MovieSession />} />
             </Routes>
         </BrowserRouter>
     )
@@ -52,7 +53,7 @@ function Movies() {
     )
 }
 
-function Movie() {
+function MovieDays() {
 
     const { movieid } = useParams();
     const [movie, setMovie] = useState({})
@@ -72,9 +73,11 @@ function Movie() {
                         <p>{day.weekday} - {day.date}</p>
                         <div className='btns'>
                         {(day.showtimes).map((showtime) =>  
-                            <button key={showtime.id}>
+                            <Link key={showtime.id} to={`/session/${movieid}`}>
+                            <button >
                                 {showtime.name}
                             </button>
+                            </Link>
                             )}
                         </div>
                     </li>)}
@@ -84,6 +87,21 @@ function Movie() {
     )
 }
 
+function MovieSession () {
 
+    const { movieid } = useParams()
+    const [seats,setSeats] = useState({})
+
+    useEffect(() => {
+        const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${movieid}/seats`)
+        promisse.then(response => {setSeats(response.data) })
+    }, [])
+
+    console.log(seats)
+    return(
+        <>
+        </>
+    )
+}
 
 
