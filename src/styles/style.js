@@ -1,3 +1,6 @@
+import styled, { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -41,3 +44,38 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:root {
+    --primary-color: #E8833A;
+    --back-header-color: #C3CFD9;
+    --back-color: rgba(126, 126, 126, 0.063);
+    --select-seat-color: #8DD7CF;
+    --unavailable-seat-color: #FBE192;
+}
+
+body{
+    background-color: var(--back-color);
+}
+
+
+h5{
+    font-size: 24px;
+    letter-spacing: -0.04px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 110px;
+}
+
+
+
+
+:link { color: transparent }                          /* cor azul */
+:visited { color: transparent }                       /* cor roxa */
+:link:active, :visited:active { color: transparent }  /* cor vermelha */
+:link, :visited { text-decoration: underline; cursor: pointer; }
+a:link[rel~=help], a:visited[rel~=help],
+area:link[rel~=help], area:visited[rel~=help] { cursor: help; }
+`
+
+
+export default GlobalStyle;

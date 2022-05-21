@@ -1,107 +1,49 @@
-import { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, Link, useParams } from 'react-router-dom'
-import axios from 'axios'
-import '../styles/reset.css'
-import '../styles/style.css'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import styled from 'styled-components'
+import Movies from './Movies'
+import MovieDays from './MovieDays'
+import MovieSession from './MovieSession'
+import GlobalStyle from '../styles/style'
 
 /* perguntar pq não tá funcionando styled components */
 
 export default function App() {
     return (
-        <BrowserRouter>
+        <>
+            <GlobalStyle />
+            <BrowserRouter>
             <Header />
-            <Routes>
-                <Route path="/" element={<Movies />} />
-                <Route path="/movie/:movieid" element={<MovieDays />} />
-                <Route path="/session/:movieid" element={<MovieSession />} />
-            </Routes>
-        </BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Movies />} />
+                    <Route path="/movie/:movieid" element={<MovieDays />} />
+                    <Route path="/session/:showtimeid" element={<MovieSession />} />
+                </Routes>
+            </BrowserRouter>
+        </>
+        
     )
 }
 
 function Header() {
     return (
-        <header>
+        <Link to='/'>
+        <Container>
             <h1>CINEFLEX</h1>
-        </header>
+        </Container>
+        </Link>
     )
 }
 
-function Movies() {
-    const [movies, setMovies] = useState([])
+const Container = styled.div`
+    background-color: var(--back-header-color);
+    color: var(--primary-color);
+    height: 67px;
+    font-size: 34px;
+    text-align: center;
+    line-height: 67px;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    font-weight: 900;
+`
 
-    useEffect(() => {
-        const promisse = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies")
-        promisse.then(response => { setMovies(response.data) })
-    }, [])
-    console.log(movies)
-
-    return (
-
-        <main>
-            <h5>Selecione o filme</h5>
-            <ul>
-                {movies.map((movie) =>
-                    <li key={movie.id}>
-                        <Link to={`/movie/${movie.id}`}>
-                            <img src={movie.posterURL} alt={movie.title} />
-                        </Link>
-                    </li>)}
-
-            </ul>
-        </main>
-    )
-}
-
-function MovieDays() {
-
-    const { movieid } = useParams();
-    const [movie, setMovie] = useState({})
-    const [days, setDays] = useState([])
-
-    useEffect(() => {
-        const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${movieid}/showtimes`)
-        promisse.then(response => { setMovie(response.data); setDays(response.data.days) })
-    }, [])
-    console.log(days)
-    return (
-        <>
-            <h5>Selecione o horário</h5>
-            <ul>
-                {days.map((day) =>
-                    <li key={day.id}>
-                        <p>{day.weekday} - {day.date}</p>
-                        <div className='btns'>
-                        {(day.showtimes).map((showtime) =>  
-                            <Link key={showtime.id} to={`/session/${movieid}`}>
-                            <button >
-                                {showtime.name}
-                            </button>
-                            </Link>
-                            )}
-                        </div>
-                    </li>)}
-            </ul>
-
-        </>
-    )
-}
-
-function MovieSession () {
-
-    const { movieid } = useParams()
-    const [seats,setSeats] = useState({})
-
-    useEffect(() => {
-        const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${movieid}/seats`)
-        promisse.then(response => {setSeats(response.data) })
-    }, [])
-
-    console.log(seats)
-    return(
-        <>
-        </>
-    )
-}
 
 
