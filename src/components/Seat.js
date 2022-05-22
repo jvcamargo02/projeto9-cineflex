@@ -9,7 +9,7 @@ export default function Seat({seat, available, color, index, selectSeat, setSele
             setIsAvailable("--back-header-color")
         } else if(available===true){
             setIsAvailable("--select-seat-color")
-            const select = [...selectSeat, index]
+            const select = [...selectSeat, {index, seat}]
             setSelectSeat(select)
         }}
 
@@ -25,7 +25,8 @@ const Button = styled.div`
  height: 26px;
  border-radius: 12px;
  background-color: var(${props => props.color});
- border: 1px solid ${props => props.color !== undefined ? `var(${props.color})` : "var(--back-header-color)"};
+ border: 1px solid var(${props => props.color});
  line-height: 26px;
  text-align: center;
+ cursor: pointer;
 `

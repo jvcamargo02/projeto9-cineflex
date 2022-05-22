@@ -4,6 +4,7 @@ import Movies from './Movies'
 import MovieDays from './MovieDays'
 import MovieSession from './MovieSession'
 import GlobalStyle from '../styles/style'
+import SucessScreen from './SucessScreen'
 
 /* perguntar pq não tá funcionando styled components */
 
@@ -17,6 +18,7 @@ export default function App() {
                     <Route path="/" element={<Movies />} />
                     <Route path="/movie/:movieid" element={<MovieDays />} />
                     <Route path="/session/:showtimeid" element={<MovieSession />} />
+                    <Route path="/sucess" element={<SucessScreen />} />
                 </Routes>
             </BrowserRouter>
         </>

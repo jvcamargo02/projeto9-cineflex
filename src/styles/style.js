@@ -67,11 +67,13 @@ h5{
 }
 
 
+::placeholder{
+	font-size: 18px;
+}
 
-
-:link { color: transparent }                          /* cor azul */
-:visited { color: transparent }                       /* cor roxa */
-:link:active, :visited:active { color: transparent }  /* cor vermelha */
+:link { color: transparent }         
+:visited { color: transparent }                      
+:link:active, :visited:active { color: transparent }  
 :link, :visited { text-decoration: underline; cursor: pointer; }
 a:link[rel~=help], a:visited[rel~=help],
 area:link[rel~=help], area:visited[rel~=help] { cursor: help; }
