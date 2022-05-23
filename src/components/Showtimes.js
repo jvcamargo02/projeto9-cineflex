@@ -23,7 +23,7 @@ export default function MovieDays() {
                         <p>{day.weekday} - {day.date}</p>
                         <Buttons>
                         {(day.showtimes).map((showtime) =>  
-                            <Link key={showtime.id} to={`/session/${showtime.id}`}>
+                            <Link key={showtime.id} to={`/assentos/${showtime.id}`}>
                             <button >
                                 {showtime.name}
                             </button>

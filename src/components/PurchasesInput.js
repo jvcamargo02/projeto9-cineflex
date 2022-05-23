@@ -1,15 +1,13 @@
 import { useState } from "react"
 import styled from "styled-components"
 
-export default function Input ({index, seatId, purchases, seatNum}){
+export default function Input ({index, purchases,seatNum}){
 
-    purchases.push({idAssento: seatId, nome:'', cpf:''})
- 
-    function setName (e){
+    function  receiveName (e){
         purchases[index].nome = e 
     }
 
-    function setCpf (e) {
+    function receiveCpf (e) {
         purchases[index].cpf = e
     }
 
@@ -19,9 +17,9 @@ export default function Input ({index, seatId, purchases, seatNum}){
         <Container> 
             <h6>Assento {seatNum}</h6> 
             <label for="name">Nome do comprador:</label>
-            <input id="name" onChange={(e) => setName(e.target.value)} placeholder="Digite seu nome..." required/>
+            <input id="name" onChange={(e) => receiveName(e.target.value)} placeholder="Digite seu nome..." required/>
             <label for="cpf">CPF do comprador:</label>
-            <input id="cpf" onChange={(e) => setCpf(e.target.value)} placeholder="Digite seu CPF..." required/>
+            <input id="cpf" onChange={(e) => receiveCpf(e.target.value)} placeholder="Digite seu CPF..." required/>
         </Container>
     )
 }

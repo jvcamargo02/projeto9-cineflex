@@ -1,14 +1,20 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Movies from './Movies'
-import MovieDays from './MovieDays'
+import MovieDays from './Showtimes'
 import MovieSession from './MovieSession'
 import GlobalStyle from '../styles/style'
 import SucessScreen from './SucessScreen'
+import { useState } from 'react'
 
 /* perguntar pq não tá funcionando styled components */
 
 export default function App() {
+    
+    const [purchases,setPurchases] = useState([])
+
+    console.log(purchases)
+
     return (
         <>
             <GlobalStyle />
@@ -16,9 +22,9 @@ export default function App() {
             <Header />
                 <Routes>
                     <Route path="/" element={<Movies />} />
-                    <Route path="/movie/:movieid" element={<MovieDays />} />
-                    <Route path="/session/:showtimeid" element={<MovieSession />} />
-                    <Route path="/sucess" element={<SucessScreen />} />
+                    <Route path="/sessoes/:movieid" element={<MovieDays />} />
+                    <Route path="/assentos/:showtimeid" element={<MovieSession purchases={purchases} setPurchases={setPurchases}/>} />
+                    <Route path="/sucess" element={<SucessScreen purchases={purchases}/>} />
                 </Routes>
             </BrowserRouter>
         </>

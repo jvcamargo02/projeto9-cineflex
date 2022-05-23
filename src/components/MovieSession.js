@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import Seat from './Seat'
-import Input from './Input'
-import SucessScreen from './SucessScreen'
+import Input from './PurchasesInput'
+import SucessScreen from './SucessScreen'  
 
-export default function MovieSession() {
 
+
+
+export default function MovieSession({purchases, setPurchases}) {
+
+    const navigate = useNavigate()
     const { showtimeid } = useParams()
     const [seats, setSeats] = useState([])
     const [selectSeat, setSelectSeat] = useState([])
-    let purchases = []
+    
     let seatArr = []
 
     console.log(selectSeat.length >= 1)
@@ -32,8 +36,10 @@ export default function MovieSession() {
 
         const promisse = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', apiObject)
         promisse.then(
-            <SucessScreen />
+            
         )
+
+        navigate('/sucess', {replace: true})
     }
 
     return (
@@ -55,6 +61,8 @@ export default function MovieSession() {
                         available={seat.isAvailable}
                         selectSeat={selectSeat}
                         setSelectSeat={setSelectSeat}
+                        setPurchases={setPurchases}
+                        purchases={purchases}
                         color={"--back-header-color"}
                     />)}
             </ul>
@@ -81,12 +89,16 @@ export default function MovieSession() {
                         index={index}
                         purchases={purchases}
                     />)}
-                {selectSeat.length >= 1 ? <button type='submit'>Reservar assento(s)</button> : null}
+                {selectSeat.length >= 1 ? 
+                <button type='submit'>Reservar assento(s)</button>  : null}
             </form>
         </Container>
     )
 }
-
+ 
+                {/* <Link to='/sucess' component={<SucessScreen purchases={purchases}/>}>
+                    
+                </Link> */}
 
 const Container = styled.div`
     padding-left: 25px;
