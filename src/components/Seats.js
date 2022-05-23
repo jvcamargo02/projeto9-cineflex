@@ -4,27 +4,25 @@ import axios from 'axios'
 import styled from 'styled-components'
 import Seat from './Seat'
 import Input from './PurchasesInput'
-import SucessScreen from './SucessScreen'  
 
 
 
 
-export default function MovieSession({purchases, setPurchases}) {
+export default function Seats({purchases, setPurchases, selectSeat, setSelectSeat, setMovies, movies}) {
 
     const navigate = useNavigate()
     const { showtimeid } = useParams()
     const [seats, setSeats] = useState([])
-    const [selectSeat, setSelectSeat] = useState([])
-    
     let seatArr = []
 
-    console.log(selectSeat.length >= 1)
+    console.log(selectSeat)
 
     useEffect(() => {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${showtimeid}/seats`)
-        promisse.then(response => { setSeats(response.data.seats) })
-
+        promisse.then(response => { setSeats(response.data.seats); setMovies(response.data) })
     }, {})
+
+    console.log(movies)
 
     function submitSuccessScreen(e) {
         e.preventDefault();
@@ -36,10 +34,10 @@ export default function MovieSession({purchases, setPurchases}) {
 
         const promisse = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', apiObject)
         promisse.then(
-            
+            navigate('/sucess', {replace: true})
         )
 
-        navigate('/sucess', {replace: true})
+        
     }
 
     return (
@@ -92,6 +90,14 @@ export default function MovieSession({purchases, setPurchases}) {
                 {selectSeat.length >= 1 ? 
                 <button type='submit'>Reservar assento(s)</button>  : null}
             </form>
+            <Footer>
+                <img src={movies.movie.posterURL} alt={movies.movie.title} />
+                <div>
+                <p>{movies.movie.title}</p>
+                <p>{movies.day.weekday} - </p>
+                <span>{movies.name}</span>
+                </div>
+            </Footer>
         </Container>
     )
 }
@@ -103,6 +109,7 @@ export default function MovieSession({purchases, setPurchases}) {
 const Container = styled.div`
     padding-left: 25px;
     padding-right: 25px;
+    margin-top: 100px;
 
     ul{
         display: flex;
@@ -154,3 +161,31 @@ const Button = styled.div`
  text-align: center;
 `
 
+const Footer = styled.div`
+    position: fixed;
+    bottom: 0; left: 0;
+    height: 115px;
+    width: 100%;
+    background-color: var(--back-header-color);
+    font-size: 26px;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    font-family: roboto;
+
+    img {
+        width: 48px;
+        height: 72px;
+        padding: 8px;
+        background-color: white;
+        box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    div{
+        display: inline-block;
+    }
+`

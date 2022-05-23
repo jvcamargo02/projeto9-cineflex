@@ -4,8 +4,6 @@ import styled from "styled-components"
 export default function Seat({seat, available, color, index, selectSeat, setSelectSeat, setPurchases, purchases}){  
     const [isAvailable, setIsAvailable] = useState(color)
 
-    console.log(purchases)
-
     function filterSelectSeat (value){
         if(value.index !== index)
         return value

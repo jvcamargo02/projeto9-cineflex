@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'  
 import styled from 'styled-components'
 
-export default function Movies() {
-    const [movies, setMovies] = useState([])
+export default function Movies({movies, setMovies}) {
+    
 
     useEffect(() => {
         const promisse = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies")
         promisse.then(response => { setMovies(response.data) })
     }, [])
-    console.log(movies)
+    
 
     return (
 
@@ -37,6 +37,7 @@ const Main = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 100px;
 
     ul {
     display: flex;
