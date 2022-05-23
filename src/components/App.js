@@ -16,7 +16,7 @@ export default function App() {
     
     
 
-    console.log(purchases)
+    console.log(movies)
 
     return (
         <>
@@ -25,7 +25,7 @@ export default function App() {
             <Header />
                 <Routes>
                     <Route path="/" element={<Movies movies={movies} setMovies={setMovies}/>} />
-                    <Route path="/sessoes/:movieid" element={<MovieDays />} />
+                    <Route path="/sessoes/:movieid" element={<MovieDays setMovies={setMovies} movies={movies}/>} />
                     <Route path="/assentos/:showtimeid" element={<Seats purchases={purchases} setPurchases={setPurchases} selectSeat={selectSeat} setSelectSeat={setSelectSeat} setMovies={setMovies} movies={movies}/>} />
                     <Route path="/sucess" element={<SucessScreen purchases={purchases} selectSeat={selectSeat} movies={movies}/>} />
                 </Routes>
@@ -44,7 +44,7 @@ function Header() {
     return (
         
         <Container>
-            {route.pathname  !== '/' ? <ion-icon onClick={() => navigate(-1)} name="arrow-undo"></ion-icon> : null}
+            {route.pathname  !== '/' ? <ion-icon visibility='hidden' onClick={() => navigate(-1)} name="arrow-undo"></ion-icon> : null}
             <Link to='/'>
             <h1>CINEFLEX</h1>
             </Link>
@@ -76,6 +76,11 @@ const Container = styled.div`
         color: var(--primary-color);
         
     }
+
+    ion-icon{
+        visibility: ${props => props.visibility};
+    }
+
 `
 
 

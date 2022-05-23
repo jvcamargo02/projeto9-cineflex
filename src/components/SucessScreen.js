@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export default function SucessScreen ({purchases, selectSeat, movies}) {
-    console.log(purchases)
+    console.log(movies)
      return(
          <Container>
         <h2>Pedido feito com sucesso!</h2>

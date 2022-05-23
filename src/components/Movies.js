@@ -22,9 +22,6 @@ export default function Movies({movies, setMovies}) {
                         <Link to={`/sessoes/${movie.id}`}>
                             <img src={movie.posterURL} alt={movie.title} />
                         </Link>
-                        <footer>
-
-                        </footer>
                     </li>)}
 
             </ul>

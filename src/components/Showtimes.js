@@ -3,18 +3,17 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components';
 
-export default function MovieDays() {
+export default function MovieDays({setMovies, movies}) {
 
     const { movieid } = useParams();
-    const [movie, setMovie] = useState({})
     const [days, setDays] = useState([])
 
     useEffect(() => {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${movieid}/showtimes`)
-        promisse.then(response => { setMovie(response.data); setDays(response.data.days) })
+        promisse.then(response => { setMovies(response.data); setDays(response.data.days) })
     }, [])
 
-    console.log(movie)
+    console.log(movies)
 
     return (
         <Container>
@@ -35,8 +34,8 @@ export default function MovieDays() {
                     </li>)}
             </ul>
             <Footer>
-                <img src={movie.posterURL} alt={movie.title} />
-                <span>{movie.title}</span>
+                <img src={movies.posterURL} alt={movies.title} />
+                <span>{movies.title}</span>
             </Footer>
         </Container>
     )
