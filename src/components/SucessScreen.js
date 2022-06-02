@@ -18,8 +18,7 @@ export default function SucessScreen ({purchases, selectSeat, movies}) {
         <Purchases>
             <h4>Comprador(es)</h4>
             {purchases.map((purchase) => 
-                <p>Nome: {purchase.nome}</p>)}
-            {purchases.map((purchase) => 
+                <p>Nome: {purchase.nome}</p>)
                 <p>CPF: {purchase.cpf}</p>)}
         </Purchases>
          </Container>
