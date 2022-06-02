@@ -13,10 +13,6 @@ export default function App() {
     const [purchases,setPurchases] = useState([])
     const [selectSeat, setSelectSeat] = useState([])
     const [movies, setMovies] = useState([])
-    
-    
-
-    console.log(movies)
 
     return (
         <>
@@ -44,7 +40,7 @@ function Header() {
     return (
         
         <Container>
-            {route.pathname  !== '/' ? <ion-icon visibility='hidden' onClick={() => navigate(-1)} name="arrow-undo"></ion-icon> : null}
+            {route.pathname  !== '/' ? <ion-icon onClick={() => navigate(-1)} name="arrow-undo"></ion-icon> : null}
             <Link to='/'>
             <h1>CINEFLEX</h1>
             </Link>
@@ -66,19 +62,18 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    padding: 10px;
 
-    a{
-        width: 90%;
-    }
 
     h1{
-        width: 90%;
         color: var(--primary-color);
         
     }
 
     ion-icon{
-        visibility: ${props => props.visibility};
+        position: fixed;
+        left: 10px;
     }
 
 `

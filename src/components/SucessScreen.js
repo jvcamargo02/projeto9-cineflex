@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export default function SucessScreen ({purchases, selectSeat, movies}) {
-    console.log(movies)
      return(
          <Container>
         <h2>Pedido feito com sucesso!</h2>
@@ -17,9 +16,12 @@ export default function SucessScreen ({purchases, selectSeat, movies}) {
         </Voucher>
         <Purchases>
             <h4>Comprador(es)</h4>
-            {purchases.map((purchase) => 
-                <p>Nome: {purchase.nome}</p>)
-                <p>CPF: {purchase.cpf}</p>)}
+            {purchases.map((purchase, index) => 
+                <>
+                    <p>Nome: {purchase.nome}</p>
+                    <p>CPF: {purchase.cpf}</p>
+                </>
+                )}
         </Purchases>
          </Container>
      )

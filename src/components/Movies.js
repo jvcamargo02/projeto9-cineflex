@@ -10,11 +10,12 @@ export default function Movies({movies, setMovies}) {
         const promisse = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies")
         promisse.then(response => { setMovies(response.data) })
     }, [])
-    
 
     return (
 
         <Main>
+            {movies.length === 20 ?
+            <> 
             <h5>Selecione o filme</h5>
             <ul>
                 {movies.map((movie) =>
@@ -24,7 +25,7 @@ export default function Movies({movies, setMovies}) {
                         </Link>
                     </li>)}
 
-            </ul>
+            </ul></> : <h1>Carregando...</h1>}
         </Main>
     )
 }

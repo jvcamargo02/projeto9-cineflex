@@ -13,8 +13,6 @@ export default function MovieDays({setMovies, movies}) {
         promisse.then(response => { setMovies(response.data); setDays(response.data.days) })
     }, [])
 
-    console.log(movies)
-
     return (
         <Container>
             <h5>Selecione o horário</h5>

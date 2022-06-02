@@ -12,15 +12,14 @@ export default function Seats({purchases, setPurchases, selectSeat, setSelectSea
     const navigate = useNavigate()
     const { showtimeid } = useParams()
     const [seats, setSeats] = useState([])
+
     let seatArr = []
 
-    console.log(movies.movie)
     useEffect(() => {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${showtimeid}/seats`)
-        promisse.then(response => { setSeats(response.data.seats); setMovies(response.data)  })
+        promisse.then(response => { setSeats(response.data.seats); setMovies(response.data);     setSelectSeat([]);
+            setPurchases([])  })
     }, {})
-
-    console.log(movies)
 
     function submitSuccessScreen(e) {
         e.preventDefault();
@@ -88,6 +87,21 @@ export default function Seats({purchases, setPurchases, selectSeat, setSelectSea
                 {selectSeat.length >= 1 ? 
                 <button type='submit'>Reservar assento(s)</button>  : null}
             </form>
+            <Footer>
+                {movies.movie === undefined ? 
+                <>
+                <img src={movies.posterURL} alt={movies.title} />
+                <span>{movies.title}</span>
+                </> :
+                <>
+                <img src={movies.movie.posterURL} alt={movies.movie.title} />
+                <div>
+                <p>{movies.movie.title}</p>
+                <span>{movies.day.weekday} - </span>
+                <span>{movies.name}</span>
+                </div>
+                </>}
+            </Footer>
         </Container>
     )
 }
@@ -100,6 +114,7 @@ const Container = styled.div`
     padding-left: 25px;
     padding-right: 25px;
     margin-top: 100px;
+    margin-bottom: 130px;
 
     ul{
         display: flex;
@@ -151,3 +166,28 @@ const Button = styled.div`
  text-align: center;
 `
 
+const Footer = styled.div`
+    position: fixed;
+    bottom: 0; left: 0;
+    height: 115px;
+    width: 100%;
+    background-color: var(--back-header-color);
+    font-size: 26px;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    font-family: roboto;
+    img {
+        width: 48px;
+        height: 72px;
+        padding: 8px;
+        background-color: white;
+        box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    }
+    div{
+        display: inline-block;
+    }`
